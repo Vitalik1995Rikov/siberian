@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, useState } from "react";
+import Button from "../Button/Button";
 
 const DEFAULT_TODO = {
     name: '',
@@ -29,6 +30,9 @@ const Todo: FC = () => {
                     <input type="text" name="name" id="" onChange={onChange}/>
                 </label>
             </div>
+            <Button color="blue">
+                Add
+            </Button>
         </div>
     )
 }
