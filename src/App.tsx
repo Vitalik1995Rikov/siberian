@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
+import Todo from "./components/Todo/Todo";
 
 const DEFAULT_TODO_LIST = [
     {id: 1, name: 'task 1', description: 'description 1', checked: false},
@@ -12,6 +13,7 @@ const App:FC = () => {
     return(
         <div>
             <Header todoCount={todos.length}/>
+            <Todo/>
         </div>
     )
 }
