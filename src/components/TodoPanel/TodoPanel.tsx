@@ -6,7 +6,18 @@ const DEFAULT_TODO = {
     description: ''
 }
 
-const Todo: FC = () => {
+type Todo = {
+    id: number,
+    name: string,
+    description: string,
+    checked: boolean
+}
+
+interface TodoProps {
+    addTodo: ({name, description}: Omit<Todo, 'checked' | 'id' >) => void;
+}
+
+const TodoPanel: FC<TodoProps> = ({addTodo}) => {
     const [todos, setTodos] = useState(DEFAULT_TODO)
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +25,7 @@ const Todo: FC = () => {
         setTodos({...todos, [name]: value});
         console.log(todos)
     }
-    
+
 
     return (
         <div>
@@ -30,11 +41,11 @@ const Todo: FC = () => {
                     <input type="text" name="name" id="" onChange={onChange}/>
                 </label>
             </div>
-            <Button color="blue">
+            <Button color="blue" onClick={() => addTodo({name: todos.name, description: todos.description})}>
                 Add
             </Button>
         </div>
     )
 }
 
-export default Todo;
+export default TodoPanel;

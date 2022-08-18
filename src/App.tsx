@@ -1,6 +1,13 @@
 import React, { FC, useState } from "react";
 import Header from "./components/Header/Header";
-import Todo from "./components/Todo/Todo";
+import TodoPanel from "./components/TodoPanel/TodoPanel";
+
+type Todo = {
+    id: number,
+    name: string,
+    description: string,
+    checked: boolean
+}
 
 const DEFAULT_TODO_LIST = [
     {id: 1, name: 'task 1', description: 'description 1', checked: false},
@@ -9,11 +16,17 @@ const DEFAULT_TODO_LIST = [
   ]
 
 const App:FC = () => {
-    const [todos, setTodos] = useState(DEFAULT_TODO_LIST)
+    const [todos, setTodos] = useState(DEFAULT_TODO_LIST);
+
+    const addTodo = ({name, description}: Omit<Todo, 'checked' | 'id'>) => {
+        setTodos([...todos, {id: todos[todos.length - 1].id + 1, description, name, checked: false }])
+    console.log(todos)
+    }
+
     return(
         <div>
             <Header todoCount={todos.length}/>
-            <Todo/>
+            <TodoPanel addTodo={addTodo}/>
         </div>
     )
 }
